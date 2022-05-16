@@ -1,6 +1,5 @@
 const express = require('express');
 const bodyParser = require('body-parser');
-const fs = require('fs/promises');
 const { readArq } = require('./helpers/data');
 
 const app = express();
@@ -23,14 +22,16 @@ app.get('/talker', async (_req, res, _next) => {
 });
 
 app.get('/talker/:id', async (req, res, _next) => {
-  const { id } = req.params
+  const { id } = req.params;
   const talker = await readArq();
-  const user = talker.find((user) => user.id === parseInt(id));
+  const palestrante = talker.find((user) => user.id === Number(id));
 
-  if(!user) return res.status(404).json({"message": "Pessoa palestrante não encontrada"});
+  if (!palestrante) return res.status(404).json({ message: 'Pessoa palestrante não encontrada' });
 
-  res.status(200).json(user);
-})
+  return res.status(200).json(palestrante);
+});
+
+app.post('/login', async (_req, _res, _next) => []);
 
 app.listen(PORT, () => {
   console.log('Online');
