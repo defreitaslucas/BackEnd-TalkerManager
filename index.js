@@ -1,6 +1,6 @@
 const express = require('express');
 const bodyParser = require('body-parser');
-const { readArq } = require('./helpers/data');
+const { readArq, tokenGeneration } = require('./helpers/data');
 
 const app = express();
 app.use(bodyParser.json());
@@ -31,7 +31,10 @@ app.get('/talker/:id', async (req, res, _next) => {
   return res.status(200).json(palestrante);
 });
 
-app.post('/login', async (_req, _res, _next) => []);
+app.post('/login', (_req, res, _next) => {
+  const token = tokenGeneration(16);
+  return res.status(200).json({ token });
+});
 
 app.listen(PORT, () => {
   console.log('Online');
