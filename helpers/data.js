@@ -18,4 +18,8 @@ const tokenGeneration = () => crypto.randomBytes(8).toString('hex');
 //     return b.join('');
 // };
 
-module.exports = { readArq, tokenGeneration };
+const writeArq = async (content) => {
+    const stringifyContent = JSON.stringify(content, null, 2); 
+    await fs.writeFile('talker.json', stringifyContent, 'utf8');
+};
+module.exports = { readArq, tokenGeneration, writeArq };
