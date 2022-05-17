@@ -17,6 +17,15 @@ app.get('/', (_request, response) => {
   response.status(HTTP_OK_STATUS).send();
 });
 
+app.get('/talker/search', authToken, async (req, res, _next) => {
+  const { q } = req.query;
+  const talkers = await readArq();
+
+  const filtered = talkers.filter((talker) => !q || talker.name.includes(q));
+
+  return res.status(200).json(filtered);
+});
+
 app.get('/talker', async (_req, res, _next) => {
   const talker = await readArq();
   if (talker) {
