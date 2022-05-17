@@ -9,7 +9,6 @@ const readArq = async () => {
 const tokenGeneration = () => crypto.randomBytes(8).toString('hex');
 
 // const tokenGeneration = (length) => {
-//     // edit the token allowed characters
 //     const a = 'abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ1234567890'.split('');
 //     const b = [];  
 //     for (let i = 0; i < length; i += 1) {
